@@ -1,0 +1,17 @@
+{
+  "name": "campaign",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "open": "node ./node_modules/cypress/bin/cypress open",
+    "run": "node ./node_modules/cypress/bin/cypress run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^12.15.0",
+    "cypress-mochawesome-reporter": "^3.7.0"
+  }
+}
