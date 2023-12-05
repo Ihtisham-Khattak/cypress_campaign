@@ -42,6 +42,7 @@ describe("Offerte Isolatie", () => {
     });
   });
 
+  //Click the button carefully.
   //   Click on the Button
   it("Gratis Woningcheck", () => {
     cy.get(".p-4 > .rounded-pill").should(($label) => {
