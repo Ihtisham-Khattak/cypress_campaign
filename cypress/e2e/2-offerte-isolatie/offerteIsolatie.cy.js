@@ -201,4 +201,6 @@ describe("Offerte Isolatie", () => {
     .should("have.text", " Volgende ")
     .click();
   });
+
+  
 });
