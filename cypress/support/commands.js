@@ -30,8 +30,8 @@ Cypress.Commands.add("performWoningcheck", () => {
         expect($label).to.have.text(" Gratis woningcheck ");
       });
       cy.get(".p-4 > .rounded-pill").click();
-      cy.get("#__BVID__19").click().type("1200as");
-      cy.get("#__BVID__20").click().type("12");
+      cy.get("#__BVID__21").click().type("1200as");
+      cy.get("#__BVID__22").click().type("12");
       cy.get("form > :nth-child(2) > .rounded-pill")
         .should("have.text", " Ophalen woninggegevens")
         .click();

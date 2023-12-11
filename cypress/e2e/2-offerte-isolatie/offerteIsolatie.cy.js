@@ -11,7 +11,7 @@ describe("Offerte Isolatie", () => {
   beforeEach(() => {
     const t0 = performance.now();
     cy.visit("offerte-verjelijker.web.app/isolatie");
-    cy.wrap(performance.now()).then((t1) => {
+    cy.wrap(t0).then((t1) => {
       cy.log(`Page load took ${t1 - t0} ms`);
     });
   });
@@ -57,8 +57,8 @@ describe("Offerte Isolatie", () => {
       expect($label).to.have.text(" Gratis woningcheck ");
     });
     cy.get(".p-4 > .rounded-pill").click();
-    cy.get("#__BVID__19").click().type("1200as");
-    cy.get("#__BVID__20").click().type("12");
+    cy.get("#__BVID__21").click().type("1200as");
+    cy.get("#__BVID__22").click().type("12");
     cy.get("form > :nth-child(2) > .rounded-pill")
       .should("have.text", " Ophalen woninggegevens")
       .click();
@@ -129,7 +129,7 @@ describe("Offerte Isolatie", () => {
   });
 
   // Ja/Nee Flow
-  it.only("Ja/Nee Flow", () => {
+  it("Ja/Nee Flow", () => {
     cy.performWoningcheck();
     cy.get(".title").should(($label) => {
       expect($label).to.have.text("Jouw adresgegevens:");
@@ -143,9 +143,62 @@ describe("Offerte Isolatie", () => {
 
     //This is for testing commants
     // Wanneer wordt u eigenaar Flow
-    cy.get('.title').should("have.text", "Wanneer wordt u eigenaar?")
-    cy.get(':nth-child(1) > .custom-control-label').should("have.text", " Nooit, ik huur de woning ").click()
+    cy.get(".title").should("have.text", "Wanneer wordt u eigenaar?");
+    cy.get(":nth-child(1) > .custom-control-label")
+      .should("have.text", " Nooit, ik huur de woning ")
+      .click();
   });
 
+  // Wanneer wordt u eigenaar? Question Flow
+  it("Ja/Nee Flow", () => {
+    cy.performWoningcheck();
+    cy.get(".title").should(($label) => {
+      expect($label).to.have.text("Jouw adresgegevens:");
+    });
 
+    cy.get(".main-cont > :nth-child(1) > .rounded-pill").click();
+    cy.get(".title").should("have.text", "Ben jij eigenaar van de woning?");
+    cy.get(":nth-child(1) > .my-3").click();
+    cy.get("form > :nth-child(2) > .rounded-pill")
+      .should("have.text", " Volgende ")
+      .click();
+
+    cy.get(".title").should("have.text", "Wanneer wordt u eigenaar?");
+    cy.get(":nth-child(1) > .custom-control-label")
+      .should("have.text", " Nooit, ik huur de woning ")
+      .click();
+    cy.get("form > :nth-child(2) > .rounded-pill")
+      .should("have.text", " Volgende ")
+      .click();
+  });
+
+  // In welke vormen van isolatie ben jij geïnteresseerd? Question Flow
+  it.only("In welke vormen van isolatie ben jij geïnteresseerd", () => {
+    cy.performWoningcheck();
+    cy.get(".title").should(($label) => {
+      expect($label).to.have.text("Jouw adresgegevens:");
+    });
+
+    cy.get(".main-cont > :nth-child(1) > .rounded-pill").click();
+    cy.get(".title").should("have.text", "Ben jij eigenaar van de woning?");
+    cy.get(":nth-child(1) > .my-3").click();
+    cy.get("form > :nth-child(2) > .rounded-pill")
+      .should("have.text", " Volgende ")
+      .click();
+
+    cy.get(".title").should("have.text", "Wanneer wordt u eigenaar?");
+    cy.get(":nth-child(1) > .custom-control-label")
+      .should("have.text", " Nooit, ik huur de woning ")
+      .click();
+    cy.get("form > :nth-child(2) > .rounded-pill")
+      .should("have.text", " Volgende ")
+      .click();
+    for (let i = 1; i <= 4; i++) {
+      cy.get(`:nth-child(${i}) > .custom-control-label`).click();
+    }
+
+    cy.get('.mt-4 > .rounded-pill')
+    .should("have.text", " Volgende ")
+    .click();
+  });
 });
